@@ -1,6 +1,4 @@
-// app/signup/page.tsx
 'use client';
-
 import { useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
@@ -11,79 +9,49 @@ export default function SignupPage() {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
+  const [confirm, setConfirm] = useState('');
   const [error, setError] = useState('');
-  const [success, setSuccess] = useState('');
+  const [loading, setLoading] = useState(false);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     setError('');
-    setSuccess('');
-
-    if (!name || !email || !password || !confirmPassword) {
-      setError('Preencha todos os campos.');
-      return;
-    }
-    if (password.length < 6) {
-      setError('A senha deve ter pelo menos 6 caracteres.');
-      return;
-    }
-    if (password !== confirmPassword) {
-      setError('As senhas não coincidem.');
-      return;
-    }
-
-    const ok = signup(name, email, password);
-    if (!ok) {
-      setError('E-mail já cadastrado.');
-      return;
-    }
-
-    setSuccess('Conta criada com sucesso!');
-    setTimeout(() => router.push('/login'), 1000);
+    if (name.trim().length < 2) { setError('Nome deve ter pelo menos 2 caracteres.'); return; }
+    if (password.length < 6) { setError('Senha deve ter pelo menos 6 caracteres.'); return; }
+    if (password !== confirm) { setError('Senhas não coincidem.'); return; }
+    setLoading(true);
+    setTimeout(() => {
+      const ok = signup(name.trim(), email, password);
+      setLoading(false);
+      if (ok) router.push('/login');
+      else setError('E-mail já cadastrado.');
+    }, 400);
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center p-6 relative z-10">
-      <div className="geo geo-tl"></div>
-      <div className="geo geo-br"></div>
-      <div className="geo geo-tr"></div>
-      <div className="geo geo-bl"></div>
-
-      <div className="auth-card">
-        <Link href="/" className="back-link">← Voltar ao início</Link>
-        <div className="auth-logo">Study <span>Club</span></div>
-        <div className="auth-title">Criar conta</div>
-        <div className="auth-sub">É grátis para começar</div>
-
-        {error && <div className="alert error">{error}</div>}
-        {success && <div className="alert success">{success}</div>}
-
-        <form onSubmit={handleSubmit}>
-          <div className="form-group">
-            <label>NOME COMPLETO</label>
-            <input type="text" value={name} onChange={(e) => setName(e.target.value)} placeholder="Seu nome" />
+    <main className="min-h-screen flex items-center justify-center px-4 py-16 relative bg-[#080c18]">
+      <div className="absolute top-0 right-1/4 w-96 h-96 rounded-full opacity-10 blur-3xl pointer-events-none bg-purple-600" />
+      <div className="absolute bottom-0 left-1/4 w-64 h-64 rounded-full opacity-10 blur-3xl pointer-events-none bg-green-500" />
+      <div className="relative z-10 w-full max-w-md">
+        <div className="text-center mb-8">
+          <Link href="/"><span className="font-syne font-bold text-2xl tracking-wide text-white">Study Club</span></Link>
+          <p className="mt-2 text-sm text-muted-foreground">Crie sua conta e entre na arena!</p>
+        </div>
+        <div className="bg-black/40 border border-purple-500/20 rounded-2xl p-8 backdrop-blur-md">
+          <h1 className="font-bebas text-3xl mb-6 text-center text-white tracking-wide">CRIAR PERSONAGEM</h1>
+          {error && <div className="mb-4 px-4 py-3 rounded-lg text-sm bg-red-500/10 border border-red-500/30 text-red-400">{error}</div>}
+          <form onSubmit={handleSubmit} className="space-y-4">
+            <input type="text" placeholder="Nome do herói" value={name} onChange={e => setName(e.target.value)} className="w-full px-4 py-3 rounded-lg bg-white/5 border border-purple-500/30 text-white focus:border-purple-500 outline-none" required />
+            <input type="email" placeholder="E-mail" value={email} onChange={e => setEmail(e.target.value)} className="w-full px-4 py-3 rounded-lg bg-white/5 border border-purple-500/30 text-white focus:border-purple-500 outline-none" required />
+            <input type="password" placeholder="Senha (mínimo 6 caracteres)" value={password} onChange={e => setPassword(e.target.value)} className="w-full px-4 py-3 rounded-lg bg-white/5 border border-purple-500/30 text-white focus:border-purple-500 outline-none" required />
+            <input type="password" placeholder="Confirmar senha" value={confirm} onChange={e => setConfirm(e.target.value)} className="w-full px-4 py-3 rounded-lg bg-white/5 border border-purple-500/30 text-white focus:border-purple-500 outline-none" required />
+            <button type="submit" disabled={loading} className="w-full py-3 rounded-xl bg-green-600 text-white font-syne font-bold hover:opacity-90 disabled:opacity-60">INICIAR AVENTURA</button>
+          </form>
+          <div className="mt-6 text-center text-sm text-muted-foreground">
+            Já tem conta? <Link href="/login" className="text-purple-400 hover:underline">Fazer login</Link>
           </div>
-          <div className="form-group">
-            <label>EMAIL</label>
-            <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="seu@email.com" />
-          </div>
-          <div className="form-group">
-            <label>SENHA</label>
-            <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="Mínimo 6 caracteres" />
-          </div>
-          <div className="form-group">
-            <label>CONFIRMAR SENHA</label>
-            <input type="password" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} placeholder="Repita a senha" />
-          </div>
-          <button type="submit" className="btn-submit">Criar conta</button>
-        </form>
-
-        <div className="auth-alt">
-          Já tem conta?{' '}
-          <Link href="/login" className="text-purple-light font-semibold hover:underline">Fazer login</Link>
         </div>
       </div>
-    </div>
+    </main>
   );
 }

@@ -1,76 +1,69 @@
+import Link from 'next/link';
 import Navbar from '@/components/Navbar';
 import RpgBattlePreview from '@/components/RpgBattlePreview';
-import Link from 'next/link';
 
 export default function Home() {
   return (
-    <main className="relative min-h-screen">
+    <main className="min-h-screen bg-[#080c18] overflow-x-hidden relative">
       <div className="geo geo-tl"></div>
-      <div className="geo geo-br"></div>
       <div className="geo geo-tr"></div>
       <div className="geo geo-bl"></div>
-
       <Navbar />
-
-      {/* Hero Section */}
-      <section className="relative z-10 text-center pt-24 pb-16 px-6">
-        <h1 className="font-bebas text-[clamp(42px,8vw,72px)] leading-[1.05] tracking-[2px] text-white">
-          REVISE CONTEÚDOS<br />
-          COMO UMA <span className="text-purple-light">JORNADA ÉPICA</span>
-        </h1>
-        <p className="mt-4 mx-auto max-w-md text-sm text-muted font-normal leading-relaxed">
-          Aprenda, dispute e revise com quiz gamificado estilo RPG.
-        </p>
-
-        {/* Feature Pills */}
-        <div className="flex flex-wrap justify-center gap-3 mt-10 max-w-[740px] mx-auto">
-          {[
-            { icon: '⚔️', text: 'Quiz de batalha: acertou ataca, errou perde vida.' },
-            { icon: '📚', text: 'Obtenha conhecimento enquanto se diverte.' },
-            { icon: '📊', text: 'Monitoramento de turma para professores.' },
-          ].map((pill, i) => (
-            <div key={i} className="flex items-center gap-2.5 bg-white/5 border border-white/[0.06] rounded-lg py-3.5 px-5 text-xs text-muted w-full sm:w-auto sm:max-w-[220px] text-left transition-all hover:border-purple/20 hover:bg-purple/5">
-              <span className="text-xl flex-shrink-0">{pill.icon}</span>
-              <span className="text-[11.5px] leading-relaxed">{pill.text}</span>
-            </div>
-          ))}
-        </div>
-
-        {/* CTA */}
-        <div className="mt-8">
-          <Link
-            href="/signup"
-            className="inline-block bg-green text-black rounded-lg py-3.5 px-9 font-syne text-sm font-bold transition-all hover:bg-green-dark hover:-translate-y-0.5 shadow-[0_0_24px_rgba(34,208,110,0.25)] hover:shadow-[0_0_36px_rgba(34,208,110,0.4)]"
-          >
+      <div className="container mx-auto px-4 max-w-5xl pt-32 pb-20">
+        {/* Hero */}
+        <div className="text-center">
+          <h1 className="font-bebas text-5xl md:text-6xl text-white mb-2 tracking-tight">Study Club</h1>
+          <p className="text-purple-300 font-semibold text-sm tracking-widest mb-6">PLATAFORMA DE APRENDIZADO GAMIFICADO</p>
+          <h2 className="font-bebas text-3xl md:text-4xl text-white mb-4">REVISE CONTEÚDOS COMO UMA <span className="text-purple-300">JORNADA ÉPICA</span></h2>
+          <p className="text-muted-foreground text-base max-w-lg mx-auto mb-10">Aprenda, dispute e revise com quiz gamificado estilo RPG.</p>
+          <div className="flex flex-wrap gap-3 justify-center mb-10">
+            <div className="flex items-center gap-2 px-4 py-2 bg-white/5 border border-white/10 rounded-full text-muted-foreground text-sm"><span>⚔️</span> Quiz de batalha: acertou ataca, errou perde vida.</div>
+            <div className="flex items-center gap-2 px-4 py-2 bg-white/5 border border-white/10 rounded-full text-muted-foreground text-sm"><span>📚</span> Obtenha conhecimento enquanto se diverte</div>
+            <div className="flex items-center gap-2 px-4 py-2 bg-white/5 border border-white/10 rounded-full text-muted-foreground text-sm"><span>📊</span> Monitoramento de turma para professores.</div>
+          </div>
+          <Link href="/signup" className="inline-block px-8 py-3 bg-green-600 text-white font-syne font-bold rounded-xl hover:opacity-90 transition">
             Experimente Agora
           </Link>
         </div>
-      </section>
 
-      {/* Funcionalidades */}
-      <section className="relative z-10 py-16 px-6 text-center">
-        <div className="text-xs font-semibold text-purple-light tracking-[2px] uppercase mb-3.5">
-          Funcionalidades
+        {/* Funcionalidades */}
+        <div className="mt-24 text-center">
+          <p className="text-purple-300 font-syne font-semibold text-sm tracking-widest mb-2">Funcionalidades</p>
+          <h2 className="font-bebas text-3xl md:text-4xl text-white mb-4">TUDO QUE SUA INSTITUIÇÃO PRECISA</h2>
+          <p className="text-muted-foreground max-w-md mx-auto mb-10">Sistema acadêmico gamificado para engajar alunos e acompanhar desempenho em tempo real.</p>
+          <div className="grid md:grid-cols-2 gap-8 items-start">
+            <div className="space-y-6 text-left">
+              <div className="bg-card/60 border border-white/10 rounded-xl p-6 backdrop-blur-sm">
+                <h3 className="font-syne font-bold text-white mb-2">APRENDIZADO ENQUANTO SE DIVERTE</h3>
+                <p className="text-muted-foreground">Transforme o conteúdo da sala de aula em ferramentas para superar desafios e aprender com diversão.</p>
+              </div>
+              <div className="bg-card/60 border border-white/10 rounded-xl p-6 backdrop-blur-sm">
+                <h3 className="font-syne font-bold text-white mb-2">Monitore o entendimento de seus alunos</h3>
+                <p className="text-muted-foreground">Monitorar o progresso dos alunos e adaptar o planejamento pedagógico é o coração de uma docência eficaz. Para que esse processo seja fluido e traga resultados reais, o ideal é estruturá-lo em três pilares: diagnóstico, análise de dados e flexibilização.</p>
+              </div>
+            </div>
+            <div className="flex justify-center"><RpgBattlePreview /></div>
+          </div>
         </div>
-        <h2 className="font-bebas text-[clamp(36px,6vw,58px)] leading-[1.05] tracking-[2px] text-white mb-3.5">
-          TUDO QUE SUA INSTITUIÇÃO<br />PRECISA
-        </h2>
-        <p className="text-sm text-muted max-w-[420px] mx-auto mb-12 leading-relaxed">
-          Sistema acadêmico gamificado para engajar alunos a acompanhar desempenho em tempo real.
-        </p>
 
-        <div className="md:row-span-2">
-          <RpgBattlePreview />
+        {/* CTA final */}
+        <div className="mt-24 text-center border-t border-purple-500/20 pt-12">
+          <h2 className="font-bebas text-3xl md:text-4xl text-white mb-4">PRONTO PARA COMEÇAR SUA JORNADA?</h2>
+          <p className="text-muted-foreground mb-6">Crie sua conta gratuitamente e comece a aprender de uma forma épica.</p>
+          <div className="flex gap-4 justify-center flex-wrap">
+            <Link href="/signup" className="px-6 py-2.5 bg-purple-600 text-white font-syne font-bold rounded-xl hover:opacity-90">
+              Criar Conta
+            </Link>
+            <Link href="/login" className="px-6 py-2.5 border border-purple-500/40 text-white font-syne font-bold rounded-xl hover:bg-white/5">
+              Já tenho conta
+            </Link>
+          </div>
         </div>
-        <div className="feat-card">
-          <h3>Aprendizado enquanto se diverte</h3>
-          <p>Transforme o conteúdo da sala de aula em ferramentas para superar desafios e aprender com diversão.</p>
-        </div>
-        <div className="feat-card">
-          <h3>Monitore o entendimento dos seus alunos</h3>
-          <p>Monitore o progresso dos alunos e adapte o planejamento pedagógico — o coração de uma docência eficaz. Para que esse processo seja fluido e traga resultados reais, o ideal é estruturá-lo em três pilares: diagnóstico, análise de dados e flexibilização.</p>
-        </div>
-      </section>
+
+        <footer className="mt-16 text-center text-muted-foreground text-xs border-t border-white/5 pt-6">
+          © 2026 Study Club. Todos os direitos reservados.
+        </footer>
+      </div>
     </main>
   );
 }
