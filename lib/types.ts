@@ -1,8 +1,9 @@
-// lib/types.ts
+// Representa um usuário completo (com senha) – usado apenas no cadastro e autenticação
 export type User = {
-  nome: string;
+  name: string;      
   email: string;
-  senha: string;
+  password: string;  
 };
 
-export type SessionUser = Omit<User, 'senha'>;
+// Representa o usuário na sessão (sem senha) – o que fica armazenado no localStorage
+export type SessionUser = Omit<User, 'password'>;
