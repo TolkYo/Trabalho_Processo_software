@@ -134,19 +134,19 @@ body {
   overflow: hidden;
   display: flex;
   flex-direction: column;
-  box-shadow: 0 0 40px rgba(124, 90, 246, 0.1);
   width: 100%;
+  box-shadow: 0 0 40px rgba(124, 90, 246, 0.1);
 }
 
 .rpg-topbar {
   background: #131828;
   border-bottom: 1px solid var(--color-border2);
-  padding: 0.5rem 0.75rem;
+  padding: 0.5rem 0.625rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  flex-shrink: 0;
 }
+
 .rpg-logo {
   font-family: 'Bebas Neue', sans-serif;
   font-size: 11px;
@@ -156,33 +156,39 @@ body {
   align-items: center;
   gap: 5px;
 }
+
 .rpg-turn {
   font-size: 9px;
   color: var(--color-muted);
   letter-spacing: 1px;
 }
 
-/* Arena — desktop: 3 colunas, mobile: 1 coluna */
 .rpg-arena {
   display: grid;
   grid-template-columns: 90px 1fr 90px;
   gap: 8px;
   padding: 10px;
+  flex: 1;
   align-items: start;
 }
 
+/* Responsivo: empilha em telas < 480px */
 @media (max-width: 480px) {
   .rpg-arena {
     grid-template-columns: 1fr;
-    gap: 10px;
+    gap: 12px;
   }
   .rpg-stat-panel,
   .rpg-center,
   .rpg-log {
     width: 100%;
   }
-  .rpg-monster-sprite {
-    margin: 0 auto;
+  .rpg-cards {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .rpg-card {
+    width: 65px !important;
   }
 }
 
@@ -191,7 +197,6 @@ body {
   border: 1px solid rgba(255, 255, 255, 0.06);
   border-radius: 8px;
   padding: 8px;
-  min-width: 0;
 }
 .rpg-avatar {
   width: 28px; height: 28px;
@@ -286,54 +291,95 @@ body {
 .rpg-log-entry.hi  { color: var(--color-green); }
 .rpg-log-entry.dmg { color: #f87171; }
 
-/* Mão de cartas */
+/* ===== Mão de cartas ===== */
 .rpg-hand {
-  padding: 8px 10px 12px;
+  padding: 8px 10px 10px;
   border-top: 1px solid rgba(255, 255, 255, 0.05);
   background: #0a0e1c;
-  flex-shrink: 0;
 }
+
 .rpg-hand-label {
-  font-size: 7px; color: var(--color-muted);
-  text-align: center; letter-spacing: 1px;
-  text-transform: uppercase; margin-bottom: 8px;
+  font-size: 7px;
+  color: var(--color-muted);
+  text-align: center;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  margin-bottom: 7px;
 }
+
 .rpg-cards {
   display: flex;
-  gap: 4px;
+  flex-wrap: nowrap;      /* não quebra linha em desktop */
+  gap: 5px;
   justify-content: center;
-  flex-wrap: nowrap;
-  overflow-x: auto;
-  padding-bottom: 2px;
+  overflow-x: auto;       /* rolagem horizontal se necessário */
+  padding-bottom: 4px;
 }
+
 .rpg-card {
   background: #141928;
   border: 1px solid rgba(124, 90, 246, 0.3);
   border-radius: 6px;
   padding: 6px 4px;
-  min-width: 48px;
-  width: 48px;
+  min-width: 52px;
+  width: auto;
   flex-shrink: 0;
   text-align: center;
   cursor: pointer;
   transition: transform 0.2s, border-color 0.2s;
   position: relative;
 }
+
 .rpg-card:hover {
   transform: translateY(-6px);
   border-color: var(--color-purple-light);
 }
+
 .rpg-card-badge {
-  position: absolute; top: -4px; left: -4px;
-  width: 14px; height: 14px; border-radius: 50%;
-  background: var(--color-purple); font-size: 7px;
-  display: flex; align-items: center; justify-content: center;
-  font-weight: 700; color: #fff;
+  position: absolute;
+  top: -4px;
+  left: -4px;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--color-purple);
+  font-size: 7px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  color: #fff;
 }
-.rpg-card-icon    { font-size: 15px; display: block; margin-bottom: 3px; }
-.rpg-card-name    { font-size: 6.5px; font-weight: 600; color: var(--color-white); line-height: 1.3; margin-bottom: 2px; }
-.rpg-card-subject { font-size: 5.5px; color: var(--color-purple-light); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 3px; }
-.rpg-card-power   { font-size: 9px; font-weight: 700; color: var(--color-green); }
+
+.rpg-card-icon {
+  font-size: 20px;        /* garante que o emoji fique grande e visível */
+  display: block;
+  margin-bottom: 3px;
+  line-height: 1;
+}
+
+.rpg-card-name {
+  font-size: 7px;
+  font-weight: 600;
+  color: var(--color-white);
+  line-height: 1.3;
+  margin-bottom: 2px;
+  white-space: nowrap;    /* impede quebra de linha no nome */
+}
+
+.rpg-card-subject {
+  font-size: 6px;
+  color: var(--color-purple-light);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 3px;
+}
+
+.rpg-card-power {
+  font-size: 9px;
+  font-weight: 700;
+  color: var(--color-green);
+}
 
 /* ============================================================
    AUTH

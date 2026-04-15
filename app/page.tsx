@@ -59,18 +59,16 @@ export default function Home() {
           Sistema acadêmico gamificado para engajar alunos a acompanhar desempenho em tempo real.
         </p>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-5 max-w-[840px] mx-auto items-start">
-          <div className="md:row-span-2">
-            <RpgBattlePreview />
-          </div>
-          <div className="feat-card">
-            <h3>Aprendizado enquanto se diverte</h3>
-            <p>Transforme o conteúdo da sala de aula em ferramentas para superar desafios e aprender com diversão.</p>
-          </div>
-          <div className="feat-card">
-            <h3>Monitore o entendimento dos seus alunos</h3>
-            <p>Monitore o progresso dos alunos e adapte o planejamento pedagógico — o coração de uma docência eficaz. Para que esse processo seja fluido e traga resultados reais, o ideal é estruturá-lo em três pilares: diagnóstico, análise de dados e flexibilização.</p>
-          </div>
+        <div className="md:row-span-2">
+          <RpgBattlePreview />
+        </div>
+        <div className="feat-card">
+          <h3>Aprendizado enquanto se diverte</h3>
+          <p>Transforme o conteúdo da sala de aula em ferramentas para superar desafios e aprender com diversão.</p>
+        </div>
+        <div className="feat-card">
+          <h3>Monitore o entendimento dos seus alunos</h3>
+          <p>Monitore o progresso dos alunos e adapte o planejamento pedagógico — o coração de uma docência eficaz. Para que esse processo seja fluido e traga resultados reais, o ideal é estruturá-lo em três pilares: diagnóstico, análise de dados e flexibilização.</p>
         </div>
       </section>
     </main>
