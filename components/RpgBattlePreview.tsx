@@ -10,7 +10,7 @@ export default function RpgBattlePreview() {
   ];
 
   return (
-    <div className="rpg-preview">
+    <div className="rpg-preview w-full">
       <div className="rpg-topbar">
         <div className="rpg-logo">⚔️ StudyQuest RPG</div>
         <div className="rpg-turn">TURNO 1 · FASE 1-3</div>
